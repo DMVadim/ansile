@@ -1,0 +1,45 @@
+---
+- name: Homework Playbook
+  hosts: local
+  become: yes
+  vars:
+    packages:
+      - net-tools
+      - git
+      - tree
+      - htop
+      - mc
+      - vim
+    users:
+      - devops_1
+      - test_1
+
+  tasks:
+    - name: Check host availability
+      ping:
+
+    - name: Update apt packages
+      apt:
+        update_cache: yes
+
+    - name: Install required packages
+      apt:
+        name: "{{ item }}"
+        state: present
+      loop: "{{ packages }}"
+
+    - name: Copy test.txt to home directory
+      copy:
+        src: test.txt
+        dest: /home/vdavletov/test.txt
+        owner: vdavletov
+        group: vdavletov
+        mode: '0644'
+
+    - name: Create users and their home directories
+      user:
+        name: "{{ item }}"
+        state: present
+        home: "/home/{{ item }}"
+        create_home: yes
+      loop: "{{ users }}"

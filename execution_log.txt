@@ -1,0 +1,39 @@
+PLAY [Homework Playbook] *******************************************************************
+
+TASK [Check host availability] *************************************************************
+ok: [server1]
+ok: [server2]
+
+TASK [Update apt packages] ****************************************************************
+changed: [server1]
+changed: [server2]
+
+TASK [Install required packages] ***********************************************************
+changed: [server1] => (item=net-tools)
+changed: [server1] => (item=git)
+changed: [server1] => (item=tree)
+changed: [server1] => (item=htop)
+changed: [server1] => (item=mc)
+changed: [server1] => (item=vim)
+changed: [server2] => (item=net-tools)
+changed: [server2] => (item=git)
+changed: [server2] => (item=tree)
+changed: [server2] => (item=htop)
+changed: [server2] => (item=mc)
+changed: [server2] => (item=vim)
+
+TASK [Copy test.txt to remote hosts] ******************************************************
+changed: [server1] => (item=devops_1)
+changed: [server1] => (item=test_1)
+changed: [server2] => (item=devops_1)
+changed: [server2] => (item=test_1)
+
+TASK [Create users and their home directories] *********************************************
+changed: [server1] => (item=devops_1)
+changed: [server1] => (item=test_1)
+changed: [server2] => (item=devops_1)
+changed: [server2] => (item=test_1)
+
+PLAY RECAP *********************************************************************************
+server1                     : ok=5    changed=6    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+server2                     : ok=5    changed=6    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
